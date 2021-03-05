@@ -23,7 +23,7 @@ public class WeatherService {
     ZipCodeRepository zipCodeRepository;
 
     public Response getForecast(String zipCode) {
-        String url = "http://api.openweathermap./data/2.5/weather?zip=" +
+        String url = "http://api.openweathermap.org/data/2.5/weather?zip=" +
                 zipCode + "&units=imperial&appid=" + apiKey;
         RestTemplate restTemplate = new RestTemplate();
 
@@ -32,6 +32,7 @@ public class WeatherService {
             newZip.setZipCode(zipCode);
             zipCodeRepository.save(newZip);
             return restTemplate.getForObject(url, Response.class);
+
         } catch (HttpClientErrorException ex) {
             Response response = new Response();
             response.setName("error");
